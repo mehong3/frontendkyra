@@ -20,92 +20,28 @@
 
               <div class="row">
                 <div class="col-sm-12 table-responsive">
-                  <table aria-describedby="example1_info" role="grid" id="example1" class="table table-bordered table-striped dataTable">
-                    <thead>
-                      <tr role="row">
-                        <th aria-label="Nama: activate to sort column ascending" style="width: 200px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Nama Pelajaran</th>
-                        <th aria-label="Guru: activate to sort column descending" aria-sort="ascending" style="width: 167px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_asc">Guru</th>
-                        <th aria-label="Mahasiswa: activate to sort column ascending" style="width: 207px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Mahasiswa</th>
-                        <th aria-label="Jadwal: activate to sort column ascending" style="width: 182px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Jadwal</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="even" role="row">
-                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                        <td class="sorting_1">Blink</td>
-                        <td>Iridium  54.0</td>
-                        <td>GNU/Linux</td>
-                      </tr>
-                      <tr class="odd" role="row">
-                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                        <td class="sorting_1">Gecko</td>
-                        <td>Firefox 1.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                      </tr>
-                      <tr class="even" role="row">
-                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                        <td class="sorting_1">Gecko</td>
-                        <td>Firefox 1.5</td>
-                        <td>Win 98+ / OSX.2+</td>
-                      </tr>
-                      <tr class="odd" role="row">
-                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                        <td class="sorting_1">Gecko</td>
-                        <td>Firefox 2.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                      </tr>
-                      <tr class="even" role="row"> 
-                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>                      
-                        <td class="sorting_1">ASU</td>
-                        <td>Firefox 3.0</td>
-                        <td>Win 2k+ / OSX.3+</td>
-                      </tr>
-                      <tr class="odd" role="row">
-                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                        <td class="sorting_1">Gecko</td>
-                        <td>Camino 1.0</td>
-                        <td>OSX.2+</td>
-                      </tr>
-                      <tr class="even" role="row">
-                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                        <td class="sorting_1">Gecko</td>
-                        <td>Camino 1.5</td>
-                        <td>OSX.3+</td>
-                      </tr>
-                      <tr class="odd" role="row">
-                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                        <td class="sorting_1">Gecko</td>
-                        <td>Netscape 7.2</td>
-                        <td>Win 95+ / Mac OS 8.6-9.2</td>
-                      </tr>
-                      <tr class="even" role="row">
-                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                        <td class="sorting_1">Gecko</td>
-                        <td>Netscape RFID 8</td>
-                        <td>Win 98SE+</td>
-                      </tr>
-                      <tr class="odd" role="row">
-                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                        <td class="sorting_1">Gecko</td>
-                        <td>Netscape Navigator 9</td>
-                        <td>Win 98+ / OSX.2+</td>
-                      </tr>
-                      <tr class="even" role="row">
-                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                        <td class="sorting_1">Gecko</td>
-                        <td>Mozilla 1.0</td>
-                        <td>Win 95+ / OSX.1+</td>
-                      </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th colspan="1" rowspan="1"></th>
-                        <th colspan="1" rowspan="1">Nama</th>
-                        <th colspan="1" rowspan="1">RFID</th>
-                        <th colspan="1" rowspan="1">Attendance</th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                  <ul>
+                    <li v-for='pelajaran in pelajarans' :key='pelajaran.nama'>
+                      <table aria-describedby="example1_info" role="grid" id="example1" class="table table-bordered table-striped dataTable">
+                        <thead>
+                          <tr role="row">
+                            <th aria-label="Nama: activate to sort column ascending" style="width: 200px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Nama Pelajaran</th>
+                            <th aria-label="Guru: activate to sort column descending" aria-sort="ascending" style="width: 167px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_asc">Guru</th>
+                            <th aria-label="Mahasiswa: activate to sort column ascending" style="width: 207px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Mahasiswa</th>
+                            <th aria-label="Jadwal: activate to sort column ascending" style="width: 182px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Jadwal</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="even" role="row">
+                            <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
+                            <td class="sorting_1">{{pelajaran.nama}}</td>
+                            <td>{{pelajaran.guru}}</td>
+                            <td>KOSONG</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -119,6 +55,7 @@
 
 <script>
 import $ from 'jquery'
+import api from '../../api/api'
 // Require needed datatables modules
 require('datatables.net')
 require('datatables.net-bs')
@@ -128,6 +65,17 @@ export default {
   mounted() {
     this.$nextTick(() => {
       $('#example1').DataTable()
+    })
+  },
+  data() {
+    return {
+      pelajarans: []
+    }
+  },
+  created() {
+    api.listPelajaran().then((res) => {
+      console.log(res.data.mahasiswas)
+      this.pelajarans = res.data.pelajarans
     })
   }
 }

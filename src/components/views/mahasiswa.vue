@@ -1,7 +1,6 @@
 <template>
    <section class="content">
     <div class="row center-block">
-      <h2>Data Murid</h2>
       <div class="col-md-12">
         <div class="box">
           <div class="box-header">
@@ -36,8 +35,8 @@
                       <tr class="even" role="row">
                         <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
                         <td class="sorting_1">{{mahasiswa.nama}}</td>
+                        <td>{{mahasiswa.rfid}}</td>
                         <td>{{mahasiswa.nim}}</td>
-                        <td>GNU/Linux</td>
                       </tr>
                     </tbody>
                   </table>

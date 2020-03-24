@@ -53,6 +53,17 @@ export default {
       mahasiswas{
         nama
         nim 
+        rfid
+      }
+    }`
+    return this.execute(queryType.QUERY, query)
+  },
+  listPelajaran () {
+    var query = `query{
+      pelajarans{
+        nama
+        guru
+        female
       }
     }`
     return this.execute(queryType.QUERY, query)
@@ -60,9 +71,21 @@ export default {
   addPelajaran (data) {
     var mutation = `mutation{ addPelajaran(
       nama: "${data.nama}",
-      guru: "${data.guru}".
+      guru: "${data.guru}",
       female: "${data.female}",
       mahasiswas: "${data.mahasiswa}"){ nama guru female mahasiswas}}`
     return this.execute(queryType.MUTATION, mutation)
+  },
+  listJadwal () {
+    var query = `query{
+      jadwals {
+        nama
+        tanggal
+        mulai 
+        selesai
+        tempat
+      }
+    }`
+    return this.execute(queryType.QUERY, query)
   }
 }
