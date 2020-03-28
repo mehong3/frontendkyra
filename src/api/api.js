@@ -51,6 +51,18 @@ export default {
   listMahasiswa () {
     var query = `query{
       mahasiswas{
+        _id
+        nama
+        nim 
+        rfid
+      }
+    }`
+    return this.execute(queryType.QUERY, query)
+  },
+  getMahasiswaById (_id) {
+    var query = `query{
+      mahasiswa(id: "${_id}"){
+        _id
         nama
         nim 
         rfid

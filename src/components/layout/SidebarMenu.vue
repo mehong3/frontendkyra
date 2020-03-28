@@ -162,6 +162,23 @@
         <small class="label pull-right bg-green">AJAX</small>
       </a>
     </router-link>
+    <router-link tag="li" class="pageLink" to="/profil">
+      <a>
+        <i class="fa fa-hdd-o"></i>
+        <span class="page">Profil</span>
+      </a>
+    </router-link><router-link tag="li" class="pageLink" to="/profilpelajaran">
+      <a>
+        <i class="fa fa-hdd-o"></i>
+        <span class="page">Profil Pelajaran</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/profilschedule">
+      <a>
+        <i class="fa fa-hdd-o"></i>
+        <span class="page">Profil Schedule</span>
+      </a>
+    </router-link>
 
     <li class="header">PAGES</li>
     <router-link tag="li" class="pageLink" to="/login">

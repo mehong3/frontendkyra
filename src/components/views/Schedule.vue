@@ -20,8 +20,6 @@
 
               <div class="row">
                 <div class="col-sm-12 table-responsive">
-                  <ul>
-                    <li v-for='jadwal in jadwals' :key='jadwal.nama'>
                       <table aria-describedby="example1_info" role="grid" id="example1" class="table table-bordered table-striped dataTable">
                         <thead>
                           <tr role="row">
@@ -35,7 +33,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr class="even" role="row">
+                          <tr class="even" role="row" v-for='jadwal in jadwals' :key='jadwal.nama'>
                             <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
                             <td class="sorting_1">Blink</td>
                             <td>{{jadwal.nama}}</td>
@@ -45,9 +43,7 @@
                             <td>Win 98+ / OSX.2+</td>
                           </tr>
                         </tbody>
-                      </table>
-                    </li>
-                  </ul>
+                      </table>                 
                 </div>
               </div>
             </div>

@@ -20,28 +20,24 @@
 
               <div class="row">
                 <div class="col-sm-12 table-responsive">
-                  <ul>
-                    <li v-for='pelajaran in pelajarans' :key='pelajaran.nama'>
-                      <table aria-describedby="example1_info" role="grid" id="example1" class="table table-bordered table-striped dataTable">
-                        <thead>
-                          <tr role="row">
-                            <th aria-label="Nama: activate to sort column ascending" style="width: 200px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Nama Pelajaran</th>
-                            <th aria-label="Guru: activate to sort column descending" aria-sort="ascending" style="width: 167px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_asc">Guru</th>
-                            <th aria-label="Mahasiswa: activate to sort column ascending" style="width: 207px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Mahasiswa</th>
-                            <th aria-label="Jadwal: activate to sort column ascending" style="width: 182px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Jadwal</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr class="even" role="row">
-                            <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                            <td class="sorting_1">{{pelajaran.nama}}</td>
-                            <td>{{pelajaran.guru}}</td>
-                            <td>KOSONG</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </li>
-                  </ul>
+                  <table aria-describedby="example1_info" role="grid" id="example1" class="table table-bordered table-striped dataTable">
+                    <thead>
+                      <tr role="row">
+                        <th aria-label="Nama: activate to sort column ascending" style="width: 200px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Nama Pelajaran</th>
+                        <th aria-label="Guru: activate to sort column descending" aria-sort="ascending" style="width: 167px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_asc">Guru</th>
+                        <th aria-label="Mahasiswa: activate to sort column ascending" style="width: 207px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Mahasiswa</th>
+                        <th aria-label="Jadwal: activate to sort column ascending" style="width: 182px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Jadwal</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="even" role="row" v-for='pelajaran in pelajarans' :key='pelajaran.nama' v-on:click='changePelajaranId(pelajaran._id)'>
+                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
+                        <td class="sorting_1">{{pelajaran.nama}}</td>
+                        <td>{{pelajaran.guru}}</td>
+                        <td>KOSONG</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -77,6 +73,13 @@ export default {
       console.log(res.data.mahasiswas)
       this.pelajarans = res.data.pelajarans
     })
+  },
+  methods: {
+    changePelajaranId (id) {
+      this.$store.dispatch('changePelajaranId', id)
+      this.$router.push({ name: 'ProfilPelajaran' })
+      console.log(id)
+    }
   }
 }
 </script>

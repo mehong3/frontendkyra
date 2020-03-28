@@ -18,6 +18,9 @@ import AddPelajaran from './components/views/addpelajaran.vue'
 import UpdatePelajaran from './components/views/updatepelajaran.vue'
 import AddSchedule from './components/views/addschedule.vue'
 import UpdateSchedule from './components/views/updateschedule.vue'
+import Profil from './components/views/profil.vue'
+import ProfilPelajaran from './components/views/profilpelajaran.vue'
+import ProfilSchedule from './components/views/profilschedule.vue'
 
 // Routes
 const routes = [
@@ -105,6 +108,21 @@ const routes = [
         component: UpdateSchedule,
         name: 'Update Schedule',
         meta: {description: 'Update Schedule'}
+      }, {
+        path: 'profil',
+        component: Profil,
+        name: 'Profil',
+        meta: {description: 'Profil Siswa'}
+      }, {
+        path: 'profilpelajaran',
+        component: ProfilPelajaran,
+        name: 'ProfilPelajaran',
+        meta: {description: 'Profil Pelajaran'}
+      }, {
+        path: 'profilschedule',
+        component: ProfilSchedule,
+        name: 'ProfilSchedule',
+        meta: {description: 'Profil Schedule'}
       }
     ]
   }, {

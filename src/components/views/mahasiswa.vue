@@ -20,29 +20,27 @@
               
               <div class="row">
                 <div class="col-sm-12 table-responsive">
-                  <ul>
-                  <li v-for='mahasiswa in mahasiswas' :key='mahasiswa.nama'>
                   <table aria-describedby="example1_info" role="grid" id="example1" class="table table-bordered table-striped dataTable">
                     <thead>
                       <tr role="row">
-                        <th aria-label="Photo: activate to sort column ascending" style="width: 10px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting"></th>
-                        <th aria-label="Nama: activate to sort column descending" aria-sort="ascending" style="width: 167px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_asc">Nama</th>
-                        <th aria-label="RFID: activate to sort column ascending" style="width: 207px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">RFID</th>
-                        <th aria-label="NIM: activate to sort column ascending" style="width: 182px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">NIM</th>
+                          <th aria-label="Photo: activate to sort column ascending" style="width: 10px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting"></th>
+                          <th aria-label="Nama: activate to sort column descending" aria-sort="ascending" style="width: 167px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_asc">Nama</th>
+                          <th aria-label="RFID: activate to sort column ascending" style="width: 207px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">RFID</th>
+                          <th aria-label="NIM: activate to sort column ascending" style="width: 182px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">NIM</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="even" role="row">
-                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                        <td class="sorting_1">{{mahasiswa.nama}}</td>
-                        <td>{{mahasiswa.rfid}}</td>
-                        <td>{{mahasiswa.nim}}</td>
+                      <tr class="even" role="row" v-for='mahasiswa in mahasiswas' :key='mahasiswa.nama' v-on:click='changeMahasiswaId(mahasiswa._id)'>
+                          <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
+                          <td class="sorting_1">{{mahasiswa.nama}}</td>
+                          <td>{{mahasiswa.rfid}}</td>
+                          <td>{{mahasiswa.nim}}</td>
                       </tr>
                     </tbody>
                   </table>
-                  </li>
-                  </ul>
                 </div>
+                <!-- <P>{{ mahasiswaId }}</P>
+                <button v-on:click="changeMahasiswaId">ganti</button> -->
               </div>              
             </div>
             <!-- /.box-body -->
@@ -62,6 +60,11 @@ require('datatables.net-bs')
 
 export default {
   name: 'Tables',
+  computed: {
+    mahasiswaId: function () {
+      return this.$store.state.mahasiswaId
+    }
+  },
   mounted() {
     this.$nextTick(() => {
       $('#example1').DataTable()
@@ -76,7 +79,15 @@ export default {
     api.listMahasiswa().then((res) => {
       /* console.log(res.data.mahasiswas) */
       this.mahasiswas = res.data.mahasiswas
+      /* console.log(this.mahasiswas) */
     })
+  },
+  methods: {
+    changeMahasiswaId (id) {
+      this.$store.dispatch('changeMahasiswaId', id)
+      this.$router.push({ name: 'Profil' })
+      console.log(id)
+    }
   }
 }
 </script>

@@ -1,5 +1,6 @@
 export default {
   callingAPI: false,
+  mahasiswaId: '',
   searching: '',
   serverURI: 'http://10.110.1.136:8080',
   user: null,
