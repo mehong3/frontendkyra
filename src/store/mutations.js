@@ -13,5 +13,8 @@ export default {
   },
   changeMahasiswaId (state, id) {
     state.mahasiswaId = id
+  },
+  changePelajaranId (state, id) {
+    state.pelajaranId = id
   }
 }

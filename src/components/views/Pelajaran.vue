@@ -70,7 +70,7 @@ export default {
   },
   created() {
     api.listPelajaran().then((res) => {
-      console.log(res.data.mahasiswas)
+      /* console.log(res.data.mahasiswas) */
       this.pelajarans = res.data.pelajarans
     })
   },

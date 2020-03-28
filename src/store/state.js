@@ -1,6 +1,7 @@
 export default {
   callingAPI: false,
   mahasiswaId: '',
+  pelajaranId: '',
   searching: '',
   serverURI: 'http://10.110.1.136:8080',
   user: null,

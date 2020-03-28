@@ -88,6 +88,17 @@ export default {
       mahasiswas: "${data.mahasiswa}"){ nama guru female mahasiswas}}`
     return this.execute(queryType.MUTATION, mutation)
   },
+  getPelajaranById (_id) {
+    var query = `query{
+      pelajaran(id: "${_id}"){
+        _id
+        nama
+        guru
+        female
+      }
+    }`
+    return this.execute(queryType.QUERY, query)
+  },
   listJadwal () {
     var query = `query{
       jadwals {

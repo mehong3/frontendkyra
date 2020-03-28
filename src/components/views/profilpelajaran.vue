@@ -22,19 +22,19 @@ require('datatables.net')
 require('datatables.net-bs')
 
 export default {
-  name: 'Profil',
+  name: 'ProfilPelajaran',
   mounted() {
     this.$nextTick(() => {
       $('#example1').DataTable()
     })
   },
   created() {
-    var PelajaranId = this.$store.state.pelajaranId
-    console.log(mahasiswaId)
-    api.getMahasiswaById(pelajaranId).then((res) => {
-      console.log(res.data.mahasiswa)
-      this.mahasiswaId = res.data.mahasiswa
-      /* console.log(this.mahasiswas) */
+    var pelajaranId = this.$store.state.pelajaranId
+    console.log(pelajaranId)
+    api.getPelajaranById(pelajaranId).then((res) => {
+      console.log(res.data.pelajaran)
+      this.pelajaranId = res.data.pelajaran
+      /* console.log(this.pelajaran) */
     })
   }
 }
