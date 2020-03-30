@@ -4,23 +4,27 @@ import NotFoundView from './components/404.vue'
 
 // Import Views - Dash
 import DashboardView from './components/views/Dashboard.vue'
-import Mahasiswa from './components/views/mahasiswa.vue'
 import TasksView from './components/views/Tasks.vue'
 import SettingView from './components/views/Setting.vue'
 import AccessView from './components/views/Access.vue'
 import ServerView from './components/views/Server.vue'
 import ReposView from './components/views/Repos.vue'
-import ScheduleView from './components/views/Schedule.vue'
-import PelajaranView from './components/views/Pelajaran.vue'
-import AddStudent from './components/views/addstudent.vue'
-import UpdateStudent from './components/views/updatestudent.vue'
-import AddPelajaran from './components/views/addpelajaran.vue'
-import UpdatePelajaran from './components/views/updatepelajaran.vue'
-import AddSchedule from './components/views/addschedule.vue'
-import UpdateSchedule from './components/views/updateschedule.vue'
-import Profil from './components/views/profil.vue'
-import ProfilPelajaran from './components/views/profilpelajaran.vue'
-import ProfilSchedule from './components/views/profilschedule.vue'
+
+import MahasiswaOne from './components/views/mahasiswaone.vue'
+import MahasiswaFinish from './components/views/mahasiswafinish.vue'
+
+import PelajaranOne from './components/views/pelajaranone.vue'
+import PelajaranTwo from './components/views/pelajarantwo.vue'
+import PelajaranFinish from './components/views/pelajaranfinish.vue'
+
+import JadwalOne from './components/views/jadwalone.vue'
+import JadwalTwo from './components/views/jadwaltwo.vue'
+import JadwalThree from './components/views/jadwalthree.vue'
+import JadwalFinish from './components/views/jadwalfinish.vue'
+
+import DataSiswa from './components/views/datasiswa.vue'
+import DataPelajaran from './components/views/datapelajaran.vue'
+import DataJadwal from './components/views/datajadwal.vue'
 
 // Routes
 const routes = [
@@ -38,11 +42,6 @@ const routes = [
         component: DashboardView,
         name: 'Dashboard',
         meta: {description: 'Overview of environment'}
-      }, {
-        path: 'mahasiswa',
-        component: Mahasiswa,
-        name: 'Mahasiswa',
-        meta: {description: 'Daftar Mahasiswa'}
       }, {
         path: 'tasks',
         component: TasksView,
@@ -69,60 +68,65 @@ const routes = [
         name: 'Repository',
         meta: {description: 'List of popular javascript repos'}
       }, {
-        path: 'pelajaran',
-        component: PelajaranView,
-        name: 'Pelajaran',
-        meta: {description: 'List of pelajaran'}
+        path: 'mahasiswaone',
+        component: MahasiswaOne,
+        name: 'Mahasiswa One',
+        meta: {description: 'Mahasiswa One'}
       }, {
-        path: 'schedule',
-        component: ScheduleView,
-        name: 'Schedule',
-        meta: {description: 'List of schedule'}
+        path: 'mahasiswafinish',
+        component: MahasiswaFinish,
+        name: 'Mahasiswa Finish',
+        meta: {description: 'Mahasiswa Finish'}
       }, {
-        path: 'addstudent',
-        component: AddStudent,
-        name: 'Add Student',
-        meta: {description: 'Tambah Murid'}
+        path: 'pelajaranone',
+        component: PelajaranOne,
+        name: 'Pelajaran One',
+        meta: {description: 'Pelajaran One'}
       }, {
-        path: 'updatestudent',
-        component: UpdateStudent,
-        name: 'Update Student',
-        meta: {description: 'Update Murid'}
+        path: 'pelajarantwo',
+        component: PelajaranTwo,
+        name: 'Pelajaran Two',
+        meta: {description: 'Pelajaran Two'}
       }, {
-        path: 'addpelajaran',
-        component: AddPelajaran,
-        name: 'Add Pelajaran',
-        meta: {description: 'Tambah Pelajaran'}
+        path: 'pelajaranfinish',
+        component: PelajaranFinish,
+        name: 'Pelajaran Finish',
+        meta: {description: 'Pelajaran Finish'}
       }, {
-        path: 'updatepelajaran',
-        component: UpdatePelajaran,
-        name: 'Update Pelajaran',
-        meta: {description: 'Update Pelajaran'}
+        path: 'jadwalone',
+        component: JadwalOne,
+        name: 'Jadwal One',
+        meta: {description: 'Jadwal One'}
       }, {
-        path: 'addschedule',
-        component: AddSchedule,
-        name: 'Add Schedule',
-        meta: {description: 'Tambah Schedule'}
+        path: 'jadwaltwo',
+        component: JadwalTwo,
+        name: 'Jadwal Two',
+        meta: {description: 'Jadwal Two'}
       }, {
-        path: 'updateschedule',
-        component: UpdateSchedule,
-        name: 'Update Schedule',
-        meta: {description: 'Update Schedule'}
+        path: 'jadwalthree',
+        component: JadwalThree,
+        name: 'Jadwal Three',
+        meta: {description: 'Jadwal Three'}
       }, {
-        path: 'profil',
-        component: Profil,
-        name: 'Profil',
-        meta: {description: 'Profil Siswa'}
+        path: 'jadwalfinish',
+        component: JadwalFinish,
+        name: 'Jadwal Finish',
+        meta: {description: 'Jadwal Finish'}
       }, {
-        path: 'profilpelajaran',
-        component: ProfilPelajaran,
-        name: 'ProfilPelajaran',
-        meta: {description: 'Profil Pelajaran'}
+        path: 'datasiswa',
+        component: DataSiswa,
+        name: 'Data Siswa',
+        meta: {description: 'Data Siswa'}
       }, {
-        path: 'profilschedule',
-        component: ProfilSchedule,
-        name: 'ProfilSchedule',
-        meta: {description: 'Profil Schedule'}
+        path: 'datapelajaran',
+        component: DataPelajaran,
+        name: 'Data Pelajaran',
+        meta: {description: 'Data Pelajaran'}
+      }, {
+        path: 'datajadwal',
+        component: DataJadwal,
+        name: 'Data Jadwal',
+        meta: {description: 'Data Jadwal'}
       }
     ]
   }, {

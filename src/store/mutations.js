@@ -16,5 +16,11 @@ export default {
   },
   changePelajaranId (state, id) {
     state.pelajaranId = id
+  },
+  changePelajaranToAdd (state, data) {
+    state.pelajaranToAdd = data
+  },
+  changeJadwalToAdd (state, data) {
+    state.jadwalToAdd = data
   }
 }

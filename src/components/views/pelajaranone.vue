@@ -6,64 +6,43 @@
           <div class="box-header">
             <h3 class="box-title">Tambah Pelajaran</h3>
               
-              <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+              <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="form_box">
                 <b-form-group
                   id="input-group-1"
-                  label="Pelajaran:"
+                  label="Nama Pelajaran:"
                   label-for="input-1"
-                  description="Masukkan Pelajaran"
                 >
                   <b-form-input
                     id="input-1"
-                    v-model="form.pelajaran"
-                    type="pelajaran"
+                    v-model="form.nama"
                     required
-                    placeholder="Masukan Pelajaran"
+                    placeholder="Masukan Nama Pelajaran"
                   ></b-form-input>
                 </b-form-group>
 
-                <b-form-group id="input-group-2" label="mahasiswa" label-for="input-2">
+                <b-form-group id="input-group-2" label="Guru:" label-for="input-2">
                   <b-form-input
                     id="input-2"
-                    v-model="form.mahasiswa"
+                    v-model="form.guru"
                     required
-                    placeholder="Masukan Mahasiswa"
+                    placeholder="Masukan Nama Guru"
                   ></b-form-input>
                 </b-form-group>
 
-                <b-form-group id="input-group-3" label="Tempat:" label-for="input-3">
-                  <b-form-select
-                    id="input-3"
-                    v-model="form.tempat"
-                    :options="tempat"
-                    required
-                  ></b-form-select>
-               </b-form-group>
-
-                <div>
-                  <label for="example-datepicker">Choose a date</label>
-                  <b-form-datepicker id="example-datepicker" v-model="value" class="mb-2"></b-form-datepicker>
-                  <p>Value: '{{ value }}'</p>
-                </div>
-
-                <div>
-                  <b-form-timepicker v-model="value2" locale="en"></b-form-timepicker>
-                  <div class="mt-2">Value2: '{{ value2 }}'</div>
-                </div>
-
-                <div>
-                  <b-form-timepicker v-model="value3" locale="en"></b-form-timepicker>
-                  <div class="mt-2">Value3: '{{ value3 }}'</div>
-                </div>                 
+                <b-form-group id="input-group-3" label="Jenis Kelamin:" label-for="input-3">
+                  <b-form-checkbox v-model="form.female" name="check-button" switch>
+                   <b>{{form.female?'Perempuan':'Laki-laki'}}</b>
+                  </b-form-checkbox>
+                </b-form-group>
 
                 <div class="button">
-                  <b-button type="submit" variant="primary">Submit</b-button>
-                  <b-button type="reset" variant="danger">Reset</b-button>
+                  <b-button type="reset" variant="danger">Reset</b-button> 
+                  <b-button type="submit" variant="success" style="margin-left: 0.5vw">Submit</b-button>
                 </div> 
               </b-form>
-              <b-card class="mt-3" header="Form Data Result">
+              <!-- <b-card class="mt-3" header="Form Data Result">
                 <pre class="m-0">{{ form }}</pre>
-              </b-card>
+              </b-card> -->
             </div>
           </div>
         </div>
@@ -73,12 +52,13 @@
 
 <script>
 import $ from 'jquery'
+// import api from '../../api/api'
 // Require needed datatables modules
 require('datatables.net')
 require('datatables.net-bs')
 
 export default {
-  name: 'UpdateSchedule',
+  name: 'AddPelajaran',
   mounted() {
     this.$nextTick(() => {
       $('#example1').DataTable()
@@ -87,43 +67,37 @@ export default {
   data() {
     return {
       form: {
-        pelajaran: '',
-        mahasiswa: '',
-        tempat: null,
-        tanggal: '',
-        mulai: '',
-        selesai: ''
+        nama: '',
+        female: false,
+        guru: ''
       },
-      value: '',
-      value2: '',
-      value3: '',
-      tempat: [{ text: 'Pilih Tempat', value: null }, 'Lab', 'Ruang 1', 'Ruang 2', 'Ruang 3'],
-      show: true
+      show: true,
+      value: ''
     }
   },
   methods: {
     onSubmit(evt) {
-      this.form.tanggal = this.value
-      this.form.mulai = this.value2
-      this.form.selesai = this.value3
+      // this.form.tanggal = this.value
       evt.preventDefault()
-      alert(JSON.stringify(this.form))
+      // alert(JSON.stringify(this.form))
+      this.$store.dispatch('changePelajaranToAdd', this.form)
+      this.$router.push({ name: 'Pelajaran Two' })
     },
     onReset(evt) {
       evt.preventDefault()
       // Reset our form values
-      this.form.id = ''
-      this.form.tanggal = ''
-      this.form.mulai = ''
-      this.form.selesai = ''
-      this.form.pelajaran = ''
-      this.form.mahasiswa = ''
+      this.form.nama = ''
+      this.form.female = false
+      this.form.guru = ''
       // Trick to reset/clear native browser form validation state
       this.show = false
       this.$nextTick(() => {
         this.show = true
       })
     }
+  },
+  created () {
+    this.form = this.$store.state.pelajaranToAdd
   }
 }
 </script>
@@ -165,5 +139,10 @@ button {
 
 .row .image img {
   border-radius: 50%
+}
+
+.form_box{
+  padding: 0;
+  margin-top: 2vh ;
 }
 </style>

@@ -7,6 +7,20 @@ var queryType = {
   QUERY: 0
 }
 
+function arrayToString (data) {
+  var str = '['
+  var counter = 1
+  data.map((res) => {
+    str = str + '"' + res + '"'
+    if (counter !== data.length) {
+      str = str + ','
+    }
+    counter += 1
+  })
+  str = str + ']'
+  return str
+}
+
 /* function getDate () {
   var today = new Date()
   var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
@@ -39,12 +53,15 @@ export default {
     }
   },
   addMahasiswa (data) {
+    var pelajarans = arrayToString(data.pelajarans)
+    var jadwals = arrayToString(data.jadwals)
+
     var mutation = `mutation{ addMahasiswa(
       nama: "${data.nama}", 
       nim: "${data.nim}",
       rfid: "${data.rfid}",
-      pelajarans: "${data.pelajarans}",
-      jadwals: "${data.jadwals}"){ nama nim }}`
+      pelajarans: ${pelajarans},
+      jadwals: ${jadwals}){ nama nim }}`
     // console.log(mutation)
     return this.execute(queryType.MUTATION, mutation)
   },
@@ -73,6 +90,7 @@ export default {
   listPelajaran () {
     var query = `query{
       pelajarans{
+        _id
         nama
         guru
         female
@@ -81,11 +99,13 @@ export default {
     return this.execute(queryType.QUERY, query)
   },
   addPelajaran (data) {
+    var mahasiswas = arrayToString(data.mahasiswas)
+
     var mutation = `mutation{ addPelajaran(
       nama: "${data.nama}",
       guru: "${data.guru}",
-      female: "${data.female}",
-      mahasiswas: "${data.mahasiswa}"){ nama guru female mahasiswas}}`
+      female: ${data.female},
+      mahasiswas: ${mahasiswas}){ nama guru female}}`
     return this.execute(queryType.MUTATION, mutation)
   },
   getPelajaranById (_id) {
@@ -95,6 +115,11 @@ export default {
         nama
         guru
         female
+        mahasiswas {
+          _id
+          nama
+          nim
+        }
       }
     }`
     return this.execute(queryType.QUERY, query)

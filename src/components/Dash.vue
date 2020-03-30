@@ -11,10 +11,10 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>
+        <h1><b>
           {{$route.name.toUpperCase() }}
-          <small>{{ $route.meta.description }}</small>
-        </h1>
+          <!-- <small>{{ $route.meta.description }}</small> -->
+        </b></h1>
         <ol class="breadcrumb">
           <li>
             <a href="javascript:;">

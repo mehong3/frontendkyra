@@ -7,69 +7,59 @@
         <span class="page">Laman Utama</span>
       </a>
     </router-link>
-    
-    <router-link tag="li" class="pageLink" to="/schedule">
+
+    <router-link tag="li" class="pageLink" to="/mahasiswaone">
       <a>
         <i class="fa fa-table"></i>
-        <span class="page">Schedule</span>
+        <span class="page">Create Mahasiswa</span>
       </a>
     </router-link>
 
-    <router-link tag="li" class="pageLink" to="/addschedule">
+    <router-link tag="li" class="pageLink" to="/pelajaranone">
       <a>
         <i class="fa fa-table"></i>
-        <span class="page">Add Schedule</span>
-      </a>
-    </router-link>
-    
-    <router-link tag="li" class="pageLink" to="/updateschedule">
-      <a>
-        <i class="fa fa-table"></i>
-        <span class="page">Update Schedule</span>
+        <span class="page">Create Pelajaran</span>
       </a>
     </router-link>
 
-    <router-link tag="li" class="pageLink" to="/mahasiswa">
+    <router-link tag="li" class="pageLink" to="/jadwalone">
       <a>
         <i class="fa fa-table"></i>
-        <span class="page">Daftar Mahasiswa</span>
-      </a>
-    </router-link>
-
-    <router-link tag="li" class="pageLink" to="/addstudent">
-      <a>
-        <i class="fa fa-table"></i>
-        <span class="page">Add Mahasiswa</span>
-      </a>
-    </router-link>
-
-    <router-link tag="li" class="pageLink" to="/updatestudent">
-      <a>
-        <i class="fa fa-table"></i>
-        <span class="page">Update Mahasiswa</span>
+        <span class="page">Create Jadwal</span>
       </a>
     </router-link>
     
-    <router-link tag="li" class="pageLink" to="/pelajaran">
+    <!-- <router-link tag="li" class="pageLink" to="/updateschedule">
       <a>
         <i class="fa fa-table"></i>
-        <span class="page">Pelajaran</span>
+        <span class="page">Abaikan</span>
       </a>
-    </router-link>
+    </router-link> -->
 
-    <router-link tag="li" class="pageLink" to="/addpelajaran">
-      <a>
-        <i class="fa fa-table"></i>
-        <span class="page">Add Pelajaran</span>
-      </a>
-    </router-link>
 
-    <router-link tag="li" class="pageLink" to="/updatepelajaran">
+
+    <!-- <router-link tag="li" class="pageLink" to="/updatestudent">
       <a>
         <i class="fa fa-table"></i>
-        <span class="page">Update Pelajaran</span>
+        <span class="page">Abaikan</span>
       </a>
-    </router-link>
+    </router-link> -->
+    
+
+
+    <!-- <router-link tag="li" class="pageLink" to="/updatepelajaran">
+      <a>
+        <i class="fa fa-table"></i>
+        <span class="page">Abaikan</span>
+      </a>
+    </router-link> -->
+
+    <!-- <router-link tag="li" class="pageLink" to="/mahasiswatopelajaran">
+      <a>
+        <i class="fa fa-table"></i>
+        <span class="page">Abaikan</span>
+      </a>
+    </router-link> -->
     
      <li class="treeview">
       <a href="#">
@@ -160,23 +150,6 @@
         <i class="fa fa-heart"></i>
         <span class="page">Repos</span>
         <small class="label pull-right bg-green">AJAX</small>
-      </a>
-    </router-link>
-    <router-link tag="li" class="pageLink" to="/profil">
-      <a>
-        <i class="fa fa-hdd-o"></i>
-        <span class="page">Profil</span>
-      </a>
-    </router-link><router-link tag="li" class="pageLink" to="/profilpelajaran">
-      <a>
-        <i class="fa fa-hdd-o"></i>
-        <span class="page">Profil Pelajaran</span>
-      </a>
-    </router-link>
-    <router-link tag="li" class="pageLink" to="/profilschedule">
-      <a>
-        <i class="fa fa-hdd-o"></i>
-        <span class="page">Profil Schedule</span>
       </a>
     </router-link>
 

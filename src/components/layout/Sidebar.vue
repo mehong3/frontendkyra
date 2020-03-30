@@ -61,6 +61,14 @@ export default {
 }
 </script>
 <style scope="local">
+.main-sidebar {
+  padding-top: 0;
+}
+
+.user-panel {
+  padding-bottom: 7vh;
+}
+
 .user-panel .image img {
   border-radius: 50%;
 }

@@ -4,7 +4,7 @@
     <!-- GitHub hint -->
     <div class="row">
       <div class="col-xs-12">
-        <alert :dismissible="true"
+        <!-- <alert :dismissible="true"
                type="success"
                :iconClasses="['fa', 'fa-check']"
                title="CoPilot is open source!">
@@ -12,7 +12,7 @@
           <a href="https://github.com/misterGF/CoPilot" target="_blank">
             <i class="fa fa-github fa-2x"></i>
           </a>
-        </alert>
+        </alert> -->
       </div>
 
       <!-- Info boxes -->
