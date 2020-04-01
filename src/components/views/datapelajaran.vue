@@ -3,31 +3,69 @@
     <div class="row center-block">
         <div class="col-md-12">
           <div class="box">
-          <div class="box-grid">
-              <div class="image"><img style="border-radius: 50%; height: 30vh; width: 15vw; margin-top: 2vh;" src="/static//img//stock/user2-128x128.jpg" /></div>
-              <div class="name"><b>{{nama}}</b></div>                         
-                <div class="guru">Nama Guru</div>
-                <div class="info-guru"> {{guru}}</div>                           
-                <div class="gender">Jenis Kelamin</div>
-                <div class="info-gender"> {{female ? 'Perempuan':'Laki-laki'}} </div>                         
-                <div class="jadwal">Jadwal</div>
-                <div class="info-jadwal"> 
-                  <ul style="list-style-type:none; padding-inline-start:0;">
-                    <li v-for="item in jadwal" @click="redirectToJadwal"><span>{{item}}</span></li>
-                  </ul> 
-                </div>                         
-                <div class="mahasiswa">Mahasiswa</div>
-                <div class="info-mahasiswa">
-                  <ul style="list-style-type:none; padding-inline-start:0;">
-                    <li v-for="item in mahasiswa" @click="redirectToMahasiswa"><span>{{item}}</span></li>
-                  </ul> 
+          <div id="box-grid">
+            <div class="info-siswa">
+              <img src="/static//img//stock/user2-128x128.jpg" id="img-siswa"/>
+              <div class="text-siswa">
+                <p>{{pelajaran.nama}}</p>
+                <p style="font-weight: 400; font-size: 1.2vw;">{{pelajaran.guru}}</p>
+                <p style="font-weight: 400; font-size: 1.2vw;">{{pelajaran.female ? 'Perempuan' : 'Laki-laki'}}</p>
+                <div class="button">
+                  <b-button variant="danger" id="gaguna">Tombol</b-button> 
+                  <b-button variant="success" style="margin-left: 0.5vw" id="gaguna">Tombol</b-button>
                 </div>
-                </div>
+              </div>
+            </div>
+            <div class="info-jdwl-pel">
+                <b-tabs card>
+
+                  <!-- Kartu Mahasiswa -->
+                  <b-tab title="Mahasiswa" active button-id="tab1">
+                    <b-card-text id="scroll">
+                      <b-card-group deck>
+                      <b-card @click="redirectToMahasiswa"
+                        :header="mahasiswa.nama"
+                        border-variant="primary"
+                        header-text-variant="white"
+                        class="mb-2 mt-4"
+                        v-for="mahasiswa in mahasiswas"
+                        id="cards"
+                      >
+                        <b-card-text>
+                          NIM: {{mahasiswa.nim}} <br> Jenis kelamin: {{mahasiswa.female ? 'Perempuan' : 'Laki-laki'}}
+                        </b-card-text>
+                      </b-card>
+                      </b-card-group>
+                    </b-card-text>
+                  </b-tab>
+
+                  <!-- Kartu Jadwal -->
+                  <b-tab title="Jadwal" button-id="tab2">
+                    <b-card-text id="scroll">
+                      <b-card-group deck="">
+                       <b-card @click="redirectToJadwal"
+                        :header="jadwal.nama"
+                        border-variant="primary"
+                        header-text-variant="white"
+                        class="mb-2 mt-4"
+                        v-for="jadwal in jadwals"
+                        id="cards"
+                      >
+                        <b-card-text>
+                          Tanggal {{jadwal.tanggal}} <br> Pukul {{jadwal.mulai}}-{{jadwal.selesai}} <br> Di {{jadwal.tempat}}
+                        </b-card-text>
+                      </b-card> 
+                      </b-card-group>
+                    </b-card-text>
+                  </b-tab>
+                </b-tabs>
+            </div>
           </div>  
+          </div>
           <div class="button">
             <b-button variant="primary" to="/" style="width: 10%;">Kembali</b-button>
           </div>
-          </div>
+    </div>
     </div>
   </section>
 </template>
@@ -46,20 +84,34 @@ export default {
   },
   data() {
     return {
-      title: 'Jadwal',
-      nama: 'Matematika',
-      female: true,
-      guru: 'Benedictus Harris Hutama',
-      jadwal: ['Matematika 101', 'Matematika 101', 'Matematika 102'],
-      mahasiswa: ['Gabriel Fabiano', 'Enryl Einhard']
+      jadwals: [
+        {nama: 'Praktikum Biologi', tanggal: '5 April 2020', mulai: '08.00', selesai: '09.30', tempat: 'Laboratorium'},
+        {nama: 'UH Biologi', tanggal: '6 April 2020', mulai: '14.00', selesai: '15.00', tempat: 'Ruang Tes 1'},
+        {nama: 'Biologi 101', tanggal: '6 April 2020', mulai: '08.00', selesai: '09.30', tempat: 'Ruang 409'}
+      ],
+      pelajaran: {
+        nama: 'Biologi',
+        guru: 'Benedictus Harris',
+        female: true
+      },
+      mahasiswas: [
+        {nama: 'Gabriel Fabiano', nim: '1813912', female: true},
+        {nama: 'Benedictus Harris', nim: '1813408', female: false},
+        {nama: 'Enryl Einhard', nim: '1813497', female: true},
+        {nama: 'Ignatius Kresna', nim: '1813222', female: false},
+        {nama: 'Stefan Rafael', nim: '1813101', female: false},
+        {nama: 'Jovan Farel', nim: '1813854', female: true},
+        {nama: 'Eugenius Edward', nim: '1813008', female: false},
+        {nama: 'Billy Macarius', nim: '1813765', female: true}
+      ]
     }
   },
   methods: {
-    redirectToMahasiswa() {
-      window.location.href = '/datasiswa'
-    },
     redirectToJadwal() {
-      window.location.href = '/datajadwal'
+      this.$router.push({name: 'Data Jadwal'})
+    },
+    redirectToMahasiswa() {
+      this.$router.push({name: 'Data Siswa'})
     }
   }
 }
@@ -100,112 +152,113 @@ button {
   width: 10%;
 }
 
-.box-grid{
+#box-grid{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows:1.5fr 1.5fr 1.5fr  repeat(6, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0.5vh;
+  grid-template-columns: 0.75fr 2.25fr;
+  grid-column-gap: 0.1vw;
+  background: #f4f4f4;
 }
 
-.image {
-  grid-area: 1 / 1 / 4 / 3;
+.info-siswa {
+  grid-area: 1 / 1 / 3 / 2;
+  height: 70vh;
+  display: grid;
+  background: white;
+}
+
+.info-jdwl-pel {
+  grid-area: 1 / 2 / 3 / 4;
+  background: white;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.text-siswa {
+  text-align: center;
+  font-weight: 600;
+  font-size: 2vw;
+}
+
+#img-siswa {
+  border-radius: 50%;
+  height: 20vh; 
+  width: 10vw; 
+  margin-bottom: 3vh;
   justify-self: center;
-  align-self: center;
+  align-self: end;
 }
 
-.name {
-  grid-area: 4 / 1 / 5 / 3; 
-  justify-self: center;
-  align-self: center;
-  font-size: 3vw;
+#tab1 {
+  font-size: 1vw;
+  font-weight: 600;
+  background-color: white;
+}
+#tab1:hover {
+  background-color: #e7e7ee;
 }
 
-.guru {
-  grid-area: 5 / 1 / 6 / 2;
-  align-self: center;
-  justify-self: start;
-  padding-left: 75%;
-  font-size: 1.5vw;
+#tab2 {
+  font-size: 1vw;
+  font-weight: 600;
+  background-color: white;
+}
+#tab2:hover {
+  background-color: #e7e7ee;
 }
 
-.info-guru {
-  grid-area: 5 / 2 / 6 / 3;
-  align-self: center;
-  font-size: 1.5vw;
-}
-
-.gender {
-  grid-area: 6 / 1 / 7 / 2;
-  align-self: center;
-  justify-self: start;
-  padding-left: 75%;
-  font-size: 1.5vw;
-}
-
-.info-gender {
-  grid-area: 6 / 2 / 7 / 3;
-  align-self: center;
-  font-size: 1.5vw;
-}
-
-.jadwal {
-  grid-area: 7 / 1 / 8 / 2;
-  align-self: center;
-  padding-left: 75%;
-  font-size: 1.5vw;
-  vertical-align: bottom;
-}
-
-.info-jadwal {
-  grid-area: 7 / 2 / 8 / 3;
-  align-self: flex-start;
+.card-header {
+  font-weight: 400;
   font-size: 1vw;
 }
-
-.mahasiswa {
-  grid-area: 8 / 1 / 9 / 2; 
-  align-self: center;
-  justify-self: start;
-  padding-left: 75%;
-  font-size: 1.5vw;
+.card-title {
+  font-weight: 600;
+}
+.card-text {
+  font-size: 0.75vw;
 }
 
-.info-mahasiswa {
-  grid-area: 8 / 2 / 9 / 3;
-  align-self: center;
-  font-size: 1vw;
+#scroll {
+  overflow-x: hidden; 
+  overflow-y: scroll; 
+  height: 60vh;
 }
-.info-jadwal li {
-  text-align: left;
-  width: auto;
-  margin-top: 1%;
+
+#scroll::-webkit-scrollbar {
+    width: 1rem;
 }
-.info-jadwal span {
-  background-color: #007bff;
-  border-radius: 5%;
-  padding: 0.3% 0.7%;
+ 
+#scroll::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+#scroll::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+#gaguna {
+  width: 4vw;
+}
+
+#cards {
+  max-width: 10vw; 
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
+  min-width: 10vw; 
+  background-color: white;
   transition: 0.5s ease;
-  color: white;
 }
-.info-jadwal span:hover {
-  background-color: #1c5fa7;
-  box-shadow: 0 2px 2px rgba(0,0,0,0.20), 0 2px 2px rgba(0,0,0,0.30);
+
+#cards:hover {
+  background-color: #f5f5f8;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.17), 0 2px 5px rgba(0,0,0,0.3); 
 }
-.info-mahasiswa li {
-  text-align: left;
-  width: auto;
-  margin-top: 1%;
-}
-.info-mahasiswa span {
+
+#cards .card-header {
   background-color: #007bff;
-  border-radius: 5%;
-  padding: 0.3% 0.7%;
-  transition: 0.5s ease;
-  color: white;
+  transition: 0.5s ease
 }
-.info-mahasiswa span:hover {
-  background-color: #1c5fa7;
-  box-shadow: 0 2px 2px rgba(0,0,0,0.20), 0 2px 2px rgba(0,0,0,0.30);
+
+#cards:hover .card-header {
+  background-color: #1673d6;
 }
 </style>

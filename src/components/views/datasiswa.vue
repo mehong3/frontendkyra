@@ -3,31 +3,68 @@
     <div class="row center-block">
         <div class="col-md-12">
           <div class="box">
-          <div class="box-grid">
-              <div class="image"><img style="border-radius: 50%; height: 30vh; width: 15vw; margin-top: 2vh;" src="/static//img//stock/user2-128x128.jpg" /></div>
-              <div class="name"><b>{{nama}}</b></div>                         
-                <div class="gender">Jenis Kelamin</div>
-                <div class="info-gender"> {{female ? 'Perempuan':'Laki-laki'}}</div>                           
-                <div class="nim">NIM</div>
-                <div class="info-nim"> {{nim}} </div>                         
-                <div class="pelajaran">Pelajaran</div>
-                <div class="info-pelajaran"> 
-                  <ul style="list-style-type:none; padding-inline-start:0;">
-                    <li v-for="item in pelajaran" @click="redirectToPelajaran"><span>{{item}}</span></li>
-                  </ul> 
-                </div>                         
-                <div class="jadwal">Jadwal</div>
-                <div class="info-jadwal">
-                  <ul style="list-style-type:none; padding-inline-start:0;">
-                    <li v-for="item in jadwal" @click="redirectToJadwal"><span>{{item}}</span></li>
-                  </ul> 
+          <div id="box-grid">
+            <div class="info-siswa">
+              <img src="/static//img//stock/user2-128x128.jpg" id="img-siswa"/>
+              <div class="text-siswa">
+                <p>{{mahasiswa.nama}}</p>
+                <p style="font-weight: 400; font-size: 1.2vw;">{{mahasiswa.nim}}</p>
+                <p style="font-weight: 400; font-size: 1.2vw;">{{mahasiswa.female ? 'Perempuan' : 'Laki-laki'}}</p>
+                <div class="button">
+                  <b-button variant="danger" id="gaguna">Tombol</b-button> 
+                  <b-button variant="success" style="margin-left: 0.5vw" id="gaguna">Tombol</b-button>
                 </div>
-                </div>
+              </div>
+            </div>
+            <div class="info-jdwl-pel">
+                <b-tabs card>
+                  <!-- Kartu Jadwal -->
+                  <b-tab title="Jadwal" active button-id="tab1">
+                    <b-card-text id="scroll">
+                      <b-card-group deck="">
+                       <b-card @click="redirectToJadwal"
+                        :header="jadwal.nama"
+                        border-variant="primary"
+                        header-text-variant="white"
+                        class="mb-2 mt-4"
+                        v-for="jadwal in jadwals"
+                        id="cards"
+                      >
+                        <b-card-text>
+                          Tanggal {{jadwal.tanggal}} <br> Pukul {{jadwal.mulai}}-{{jadwal.selesai}} <br> Di {{jadwal.tempat}}
+                        </b-card-text>
+                      </b-card> 
+                      </b-card-group>
+                    </b-card-text>
+                  </b-tab>
+
+                  <!-- Kartu Pelajaran -->
+                  <b-tab title="Pelajaran" button-id="tab2">
+                    <b-card-text id="scroll">
+                      <b-card-group deck>
+                      <b-card @click="redirectToPelajaran"
+                        :header="pelajaran.nama"
+                        border-variant="primary"
+                        header-text-variant="white"
+                        class="mb-2 mt-4"
+                        v-for="pelajaran in pelajarans"
+                        id="cards"
+                      >
+                        <b-card-text>
+                          Dibawakan oleh {{pelajaran.guru}}, {{pelajaran.female ? 'Perempuan' : 'Laki-laki'}}
+                        </b-card-text>
+                      </b-card>
+                      </b-card-group>
+                    </b-card-text>
+                  </b-tab>
+                </b-tabs>
+            </div>
           </div>  
+          </div>
           <div class="button">
             <b-button variant="primary" to="/" style="width: 10%;">Kembali</b-button>
           </div>
-          </div>
+    </div>
     </div>
   </section>
 </template>
@@ -46,20 +83,31 @@ export default {
   },
   data() {
     return {
-      title: 'Jadwal',
-      nama: 'Gabriel Fabiano',
-      female: false,
-      nim: '1813414',
-      pelajaran: ['Matematika', 'Biologi'],
-      jadwal: ['Mat 101', 'Biologi 101', 'Biologi 102']
+      jadwals: [
+        {nama: 'Filsafat 101', tanggal: '5 April 2020', mulai: '14.00', selesai: '15.30', tempat: 'Ruang 405'},
+        {nama: 'Praktikum Biologi', tanggal: '5 April 2020', mulai: '08.00', selesai: '09.30', tempat: 'Laboratorium'},
+        {nama: 'UH Biologi', tanggal: '6 April 2020', mulai: '14.00', selesai: '15.00', tempat: 'Ruang Tes 1'},
+        {nama: 'Biologi 101', tanggal: '6 April 2020', mulai: '08.00', selesai: '09.30', tempat: 'Ruang 409'},
+        {nama: 'Filsafat 101', tanggal: '6 April 2020', mulai: '12.00', selesai: '13.00', tempat: 'Ruang 108'},
+        {nama: 'UTS Filsafat', tanggal: '7 April 2020', mulai: '10.00', selesai: '11.30', tempat: 'Ruang Tes 1'}
+      ],
+      pelajarans: [
+        {nama: 'Filsafat', guru: 'Benedictus Harris', female: true},
+        {nama: 'Biologi', guru: 'Macarius Billy', female: false}
+      ],
+      mahasiswa: {
+        nama: 'Gabriel Fabiano',
+        nim: '1813414',
+        female: true
+      }
     }
   },
   methods: {
-    redirectToPelajaran() {
-      window.location.href = '/datapelajaran'
-    },
     redirectToJadwal() {
-      window.location.href = '/datajadwal'
+      this.$router.push({name: 'Data Jadwal'})
+    },
+    redirectToPelajaran() {
+      this.$router.push({name: 'Data Pelajaran'})
     }
   }
 }
@@ -100,113 +148,113 @@ button {
   width: 10%;
 }
 
-.box-grid{
+#box-grid{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows:1fr 1fr 1fr  repeat(6, 0.5fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0.5vh;
+  grid-template-columns: 0.75fr 2.25fr;
+  grid-column-gap: 0.1vw;
+  background: #f4f4f4;
 }
 
-.image {
-  grid-area: 1 / 1 / 4 / 3;
+.info-siswa {
+  grid-area: 1 / 1 / 3 / 2;
+  height: 70vh;
+  display: grid;
+  background: white;
+}
+
+.info-jdwl-pel {
+  grid-area: 1 / 2 / 3 / 4;
+  background: white;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.text-siswa {
+  text-align: center;
+  font-weight: 600;
+  font-size: 2vw;
+}
+
+#img-siswa {
+  border-radius: 50%;
+  height: 20vh; 
+  width: 10vw; 
+  margin-bottom: 3vh;
   justify-self: center;
-  align-self: center;
+  align-self: end;
 }
 
-.name {
-  grid-area: 4 / 1 / 5 / 3; 
-  justify-self: center;
-  align-self: center;
-  font-size: 3vw;
+#tab1 {
+  font-size: 1vw;
+  font-weight: 600;
+  background-color: white;
+}
+#tab1:hover {
+  background-color: #e7e7ee;
 }
 
-.gender {
-  grid-area: 5 / 1 / 6 / 2;
-  align-self: center;
-  justify-self: start;
-  padding-left: 75%;
-  font-size: 1.5vw;
+#tab2 {
+  font-size: 1vw;
+  font-weight: 600;
+  background-color: white;
+}
+#tab2:hover {
+  background-color: #e7e7ee;
 }
 
-.info-gender {
-  grid-area: 5 / 2 / 6 / 3;
-  align-self: center;
-  font-size: 1.5vw;
-}
-
-.nim {
-  grid-area: 6 / 1 / 7 / 2;
-  align-self: center;
-  justify-self: start;
-  padding-left: 75%;
-  font-size: 1.5vw;
-}
-
-.info-nim {
-  grid-area: 6 / 2 / 7 / 3;
-  align-self: center;
-  font-size: 1.5vw;
-}
-
-.pelajaran {
-  grid-area: 7 / 1 / 8 / 2;
-  align-self: center;
-  padding-left: 75%;
-  font-size: 1.5vw;
-  vertical-align: bottom;
-}
-
-.info-pelajaran {
-  grid-area: 7 / 2 / 8 / 3;
-  align-self: flex-start;
+.card-header {
+  font-weight: 400;
   font-size: 1vw;
 }
-
-.jadwal {
-  grid-area: 8 / 1 / 9 / 2; 
-  align-self: center;
-  justify-self: start;
-  padding-left: 75%;
-  font-size: 1.5vw;
+.card-title {
+  font-weight: 600;
+}
+.card-text {
+  font-size: 0.75vw;
 }
 
-.info-jadwal {
-  grid-area: 8 / 2 / 9 / 3;
-  align-self: center;
-  font-size: 1vw;
+#scroll {
+  overflow-x: hidden; 
+  overflow-y: scroll; 
+  height: 60vh;
 }
-.info-pelajaran li {
-  text-align: left;
-  width: auto;
-  margin-top: 1%;
+
+#scroll::-webkit-scrollbar {
+    width: 1rem;
 }
-.info-pelajaran span {
-  background-color: #007bff;
-  border-radius: 5%;
-  padding: 0.3% 0.7%;
+ 
+#scroll::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+#scroll::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+#gaguna {
+  width: 4vw;
+}
+
+#cards {
+  max-width: 10vw; 
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
+  min-width: 10vw; 
+  background-color: white;
   transition: 0.5s ease;
-  color: white;
 }
-.info-pelajaran span:hover {
-  background-color: #1c5fa7;
-  box-shadow: 0 2px 2px rgba(0,0,0,0.20), 0 2px 2px rgba(0,0,0,0.30);
+
+#cards:hover {
+  background-color: #f5f5f8;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.17), 0 2px 5px rgba(0,0,0,0.3); 
 }
-.info-jadwal li {
-  text-align: left;
-  width: auto;
-  margin-top: 1%;
-}
-.info-jadwal span {
+
+#cards .card-header {
   background-color: #007bff;
-  border-radius: 5%;
-  padding: 0.3% 0.7%;
-  transition: 0.5s ease;
-  color: white;
+  transition: 0.5s ease
 }
-.info-jadwal span:hover {
-  background-color: #1c5fa7;
-  box-shadow: 0 2px 2px rgba(0,0,0,0.20), 0 2px 2px rgba(0,0,0,0.30);
+
+#cards:hover .card-header {
+  background-color: #1673d6;
 }
 </style>
-

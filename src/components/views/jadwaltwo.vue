@@ -113,6 +113,8 @@ export default {
       // console.log(this.jadwal)
       api.getPelajaranById(this.jadwal.pelajaran).then((res) => {
         this.mahasiswas = res.data.pelajaran.mahasiswas
+        /* console.log(this.mahasiswas) */
+        console.log(res)
       })
     },
     submit () {
