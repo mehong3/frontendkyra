@@ -15,6 +15,20 @@
       </a>
     </router-link>
 
+    <router-link tag="li" class="pageLink" to="/pelajaran">
+      <a>
+        <i class="fa fa-table"></i>
+        <span class="page">Daftar Pelajaran</span>
+      </a>
+    </router-link>
+
+    <router-link tag="li" class="pageLink" to="/jadwal">
+      <a>
+        <i class="fa fa-table"></i>
+        <span class="page">Daftar Jadwal</span>
+      </a>
+    </router-link>
+
     <router-link tag="li" class="pageLink" to="/mahasiswaone">
       <a>
         <i class="fa fa-table"></i>
@@ -157,24 +171,6 @@
         <i class="fa fa-heart"></i>
         <span class="page">Repos</span>
         <small class="label pull-right bg-green">AJAX</small>
-      </a>
-    </router-link>
-
-    <router-link tag="li" class="pageLink" to="/profil">
-      <a>
-        <i class="fa fa-hdd-o"></i>
-        <span class="page">Profil</span>
-      </a>
-    </router-link><router-link tag="li" class="pageLink" to="/profilpelajaran">
-      <a>
-        <i class="fa fa-hdd-o"></i>
-        <span class="page">Profil Pelajaran</span>
-      </a>
-    </router-link>
-    <router-link tag="li" class="pageLink" to="/profilschedule">
-      <a>
-        <i class="fa fa-hdd-o"></i>
-        <span class="page">Profil Schedule</span>
       </a>
     </router-link>
 

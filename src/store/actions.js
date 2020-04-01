@@ -16,5 +16,8 @@ export default {
   },
   resetJadwalToAdd (context) {
     context.commit('changeJadwalToAdd', {})
+  },
+  changeJadwalId (context, id) {
+    context.commit('changeJadwalId', id)
   }
 }

@@ -2,6 +2,7 @@ export default {
   callingAPI: false,
   mahasiswaId: '',
   pelajaranId: '',
+  jadwalId: '',
   pelajaranToAdd: {},
   jadwalToAdd: {},
   searching: '',

@@ -1,10 +1,11 @@
 <template>
    <section class="content">
     <div class="row center-block">
+      <h2>Pelajaran</h2>
       <div class="col-md-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Tabel Data Murid</h3>
+            <h3 class="box-title">Tabel Data Pelajaran</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -17,31 +18,28 @@
                 </div>
               </div>
 
-              
               <div class="row">
                 <div class="col-sm-12 table-responsive">
                   <table aria-describedby="example1_info" role="grid" id="example1" class="table table-bordered table-striped dataTable">
                     <thead>
                       <tr role="row">
-                          <th aria-label="Photo: activate to sort column ascending" style="width: 10px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting"></th>
-                          <th aria-label="Nama: activate to sort column descending" aria-sort="ascending" style="width: 167px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_asc">Nama</th>
-                          <th aria-label="RFID: activate to sort column ascending" style="width: 207px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">RFID</th>
-                          <th aria-label="NIM: activate to sort column ascending" style="width: 182px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">NIM</th>
+                        <th aria-label="Nama: activate to sort column ascending" style="width: 200px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Nama Pelajaran</th>
+                        <th aria-label="Guru: activate to sort column descending" aria-sort="ascending" style="width: 167px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_asc">Guru</th>
+                        <th aria-label="Mahasiswa: activate to sort column ascending" style="width: 207px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Mahasiswa</th>
+                        <th aria-label="Jadwal: activate to sort column ascending" style="width: 182px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Jadwal</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="even" role="row" v-for='mahasiswa in mahasiswas' :key='mahasiswa.nama' v-on:click='changeMahasiswaId(mahasiswa._id)'>
-                          <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                          <td class="sorting_1">{{mahasiswa.nama}}</td>
-                          <td>{{mahasiswa.rfid}}</td>
-                          <td>{{mahasiswa.nim}}</td>
+                      <tr class="even" role="row" v-for='pelajaran in pelajarans' :key='pelajaran.nama' v-on:click='changePelajaranId(pelajaran._id)'>
+                        <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
+                        <td class="sorting_1">{{pelajaran.nama}}</td>
+                        <td>{{pelajaran.guru}}</td>
+                        <td>{{pelajaran.female}}</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <!-- <P>{{ mahasiswaId }}</P>
-                <button v-on:click="changeMahasiswaId">ganti</button> -->
-              </div>              
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -59,12 +57,7 @@ require('datatables.net')
 require('datatables.net-bs')
 
 export default {
-  name: 'Tables',
-  computed: {
-    mahasiswaId: function () {
-      return this.$store.state.mahasiswaId
-    }
-  },
+  name: 'Pelajaran',
   mounted() {
     this.$nextTick(() => {
       $('#example1').DataTable()
@@ -72,21 +65,20 @@ export default {
   },
   data() {
     return {
-      mahasiswas: []
+      pelajarans: []
     }
   },
   created() {
-    api.listMahasiswa().then((res) => {
-      /* console.log(res.data.mahasiswas) */
-      this.mahasiswas = res.data.mahasiswas
-      /* console.log(this.mahasiswas) */
+    api.listPelajaran().then((res) => {
+      /* console.log(res.data.pelajarans) */
+      this.pelajarans = res.data.pelajarans
     })
   },
   methods: {
-    changeMahasiswaId (id) {
-      this.$store.dispatch('changeMahasiswaId', id)
-      this.$router.push({ name: 'Data Siswa' })
-      console.log(id)
+    changePelajaranId (id) {
+      this.$store.dispatch('changePelajaranId', id)
+      this.$router.push({ name: 'Data Pelajaran' })
+      /* console.log(id) */
     }
   }
 }
@@ -121,9 +113,5 @@ table.dataTable thead .sorting_asc:after {
 
 table.dataTable thead .sorting_desc:after {
   content: '\f0de';
-}
-
-.row .image img {
-  border-radius: 50%
 }
 </style>

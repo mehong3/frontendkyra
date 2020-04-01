@@ -7,9 +7,9 @@
             <div class="info-siswa">
               <img src="/static//img//stock/user2-128x128.jpg" id="img-siswa"/>
               <div class="text-siswa">
-                <p>{{pelajaran.nama}}</p>
-                <p style="font-weight: 400; font-size: 1.2vw;">{{pelajaran.guru}}</p>
-                <p style="font-weight: 400; font-size: 1.2vw;">{{pelajaran.female ? 'Perempuan' : 'Laki-laki'}}</p>
+                <p>{{pelajaranId.nama}}</p>
+                <p style="font-weight: 400; font-size: 1.2vw;">{{pelajaranId.guru}}</p>
+                <p style="font-weight: 400; font-size: 1.2vw;">{{pelajaranId.female ? 'Perempuan' : 'Laki-laki'}}</p>
                 <div class="button">
                   <b-button variant="danger" id="gaguna">Tombol</b-button> 
                   <b-button variant="success" style="margin-left: 0.5vw" id="gaguna">Tombol</b-button>
@@ -23,12 +23,12 @@
                   <b-tab title="Mahasiswa" active button-id="tab1">
                     <b-card-text id="scroll">
                       <b-card-group deck>
-                      <b-card @click="redirectToMahasiswa"
+                      <b-card @click="changeMahasiswaId(mahasiswa._id)"
+                        v-for="mahasiswa in pelajaranId.mahasiswas" :key="mahasiswa.data"
                         :header="mahasiswa.nama"
                         border-variant="primary"
                         header-text-variant="white"
                         class="mb-2 mt-4"
-                        v-for="mahasiswa in mahasiswas"
                         id="cards"
                       >
                         <b-card-text>
@@ -43,12 +43,12 @@
                   <b-tab title="Jadwal" button-id="tab2">
                     <b-card-text id="scroll">
                       <b-card-group deck="">
-                       <b-card @click="redirectToJadwal"
+                       <b-card @click="changeJadwalId(jadwal._id)"
+                        v-for="jadwal in pelajaranId.jadwals" :key="jadwal.profil"
                         :header="jadwal.nama"
                         border-variant="primary"
                         header-text-variant="white"
                         class="mb-2 mt-4"
-                        v-for="jadwal in jadwals"
                         id="cards"
                       >
                         <b-card-text>
@@ -72,6 +72,7 @@
 
 <script>
 import $ from 'jquery'
+import api from '../../api/api'
 require('datatables.net')
 require('datatables.net-bs')
 
@@ -82,36 +83,34 @@ export default {
       $('#example1').DataTable()
     })
   },
+  created() {
+    var pelajaranId = this.$store.state.pelajaranId
+    console.log(pelajaranId)
+    api.getPelajaranById(pelajaranId).then((res) => {
+      // console.log(res.data.pelajaran)
+      this.pelajaranId = res.data.pelajaran
+      /* console.log(this.pelajaran) */
+      console.log(this.data.mahasiswas)
+    })
+  },
   data() {
     return {
-      jadwals: [
-        {nama: 'Praktikum Biologi', tanggal: '5 April 2020', mulai: '08.00', selesai: '09.30', tempat: 'Laboratorium'},
-        {nama: 'UH Biologi', tanggal: '6 April 2020', mulai: '14.00', selesai: '15.00', tempat: 'Ruang Tes 1'},
-        {nama: 'Biologi 101', tanggal: '6 April 2020', mulai: '08.00', selesai: '09.30', tempat: 'Ruang 409'}
-      ],
-      pelajaran: {
-        nama: 'Biologi',
-        guru: 'Benedictus Harris',
-        female: true
-      },
-      mahasiswas: [
-        {nama: 'Gabriel Fabiano', nim: '1813912', female: true},
-        {nama: 'Benedictus Harris', nim: '1813408', female: false},
-        {nama: 'Enryl Einhard', nim: '1813497', female: true},
-        {nama: 'Ignatius Kresna', nim: '1813222', female: false},
-        {nama: 'Stefan Rafael', nim: '1813101', female: false},
-        {nama: 'Jovan Farel', nim: '1813854', female: true},
-        {nama: 'Eugenius Edward', nim: '1813008', female: false},
-        {nama: 'Billy Macarius', nim: '1813765', female: true}
-      ]
+      jadwals: [],
+      pelajaranId: [],
+      mahasiswas: []
     }
   },
   methods: {
-    redirectToJadwal() {
-      this.$router.push({name: 'Data Jadwal'})
+    changeMahasiswaId (id) {
+      this.$store.dispatch('changeMahasiswaId', id)
+      this.$router.push({ name: 'Data Siswa' })
+      /* console.log(id) */
+      console.log(this.data.mahasiswas)
     },
-    redirectToMahasiswa() {
-      this.$router.push({name: 'Data Siswa'})
+    changeJadwalId (id) {
+      this.$store.dispatch('changeJadwalId', id)
+      this.$router.push({ name: 'Data Jadwal' })
+      /* console.log(id) */
     }
   }
 }

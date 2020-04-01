@@ -7,11 +7,11 @@
             <div class="info-siswa">
               <img src="/static//img//stock/user2-128x128.jpg" id="img-siswa"/>
               <div class="text-siswa">
-                <p style="margin-bottom: 0;">{{jadwal.nama}}</p>
-                <span class="pelajaran" @click="redirectToPelajaran">{{pelajaran}}</span>
-                <p style="font-weight: 400; font-size: 1vw;">{{jadwal.tanggal}}</p>
-                <p style="font-weight: 400; font-size: 1vw;">{{jadwal.tempat}}</p>
-                <p style="font-weight: 400; font-size: 1vw;">{{jadwal.mulai}}-{{jadwal.selesai}}</p>
+                <p style="margin-bottom: 0;">{{jadwalId.nama}}</p>
+                <!-- <span class="pelajaran" @click="redirectToPelajaran">{{pelajaran}}</span> -->
+                <p style="font-weight: 400; font-size: 1vw;">{{jadwalId.tanggal}}</p>
+                <p style="font-weight: 400; font-size: 1vw;">{{jadwalId.tempat}}</p>
+                <p style="font-weight: 400; font-size: 1vw;">{{jadwalId.mulai}}-{{jadwalId.selesai}}</p>
                 <div class="button">
                   <b-button variant="danger" id="gaguna">Tombol</b-button> 
                   <b-button variant="success" style="margin-left: 0.5vw" id="gaguna">Tombol</b-button>
@@ -25,12 +25,12 @@
                   <b-tab title="Mahasiswa" active button-id="tab1">
                     <b-card-text id="scroll">
                       <b-card-group deck>
-                      <b-card @click="redirectToMahasiswa"
+                      <b-card v-for="mahasiswa in jadwalId.mahasiswas" :key="mahasiswa.data"
+                        @click="changeMahasiswaId(mahasiswa._id)"  
                         :header="mahasiswa.nama"
                         border-variant="primary"
                         header-text-variant="white"
                         class="mb-2 mt-4"
-                        v-for="mahasiswa in mahasiswas" :key="mahasiswa.data"
                         id="cards"
                       >
                         <b-card-text>
@@ -54,6 +54,7 @@
 
 <script>
 import $ from 'jquery'
+import api from '../../api/api'
 require('datatables.net')
 require('datatables.net-bs')
 
@@ -64,34 +65,27 @@ export default {
       $('#example1').DataTable()
     })
   },
+  created() {
+    var jadwalId = this.$store.state.jadwalId
+    console.log(jadwalId)
+    api.getJadwalById(jadwalId).then((res) => {
+      // console.log(res.data.jadwal)
+      this.jadwalId = res.data.jadwal
+      console.log(this.jadwalId)
+    })
+  },
   data() {
     return {
-      jadwal: {
-        nama: 'Praktikum Biologi',
-        tanggal: '5 April 2020',
-        mulai: '08.00',
-        selesai: '09.30',
-        tempat: 'Laboratorium'
-      },
-      pelajaran: 'Biologi',
-      mahasiswas: [
-        {nama: 'Gabriel Fabiano', nim: '1813912', female: true},
-        {nama: 'Benedictus Harris', nim: '1813408', female: false},
-        {nama: 'Enryl Einhard', nim: '1813497', female: true},
-        {nama: 'Ignatius Kresna', nim: '1813222', female: false},
-        {nama: 'Stefan Rafael', nim: '1813101', female: false},
-        {nama: 'Jovan Farel', nim: '1813854', female: true},
-        {nama: 'Eugenius Edward', nim: '1813008', female: false},
-        {nama: 'Billy Macarius', nim: '1813765', female: true}
-      ]
+      jadwalId: [],
+      pelajarans: [],
+      mahasiswas: []
     }
   },
   methods: {
-    redirectToMahasiswa() {
-      this.$router.push({name: 'Data Siswa'})
-    },
-    redirectToPelajaran() {
-      this.$router.push({name: 'Data Pelajaran'})
+    changeMahasiswaId (id) {
+      this.$store.dispatch('changeMahasiswaId', id)
+      this.$router.push({ name: 'Data Siswa' })
+      /* console.log(id) */
     }
   }
 }

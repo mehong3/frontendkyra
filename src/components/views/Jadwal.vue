@@ -1,7 +1,6 @@
 <template>
    <section class="content">
     <div class="row center-block">
-      <h2>Schedule</h2>
       <div class="col-md-12">
         <div class="box">
           <div class="box-header">
@@ -35,7 +34,7 @@
                         <tbody>
                           <tr class="even" role="row" v-for='jadwal in jadwals' :key='jadwal.nama' v-on:click='changeJadwalId(jadwal._id)'>
                             <td class="gambar"><img style="border-radius: 50%; height: 50px;" src="\static\img\stock\user1-128x128.jpg" alt="foto" /></td>
-                            <td class="sorting_1">Blink</td>
+                            <td class="sorting_1">{{jadwal.tanggal}}</td>
                             <td>{{jadwal.nama}}</td>
                             <td>{{jadwal.tanggal}}</td>
                             <td>{{jadwal.mulai}}</td>
@@ -64,6 +63,11 @@ require('datatables.net-bs')
 
 export default {
   name: 'Jadwal',
+  computed: {
+    JadwalId: function () {
+      return this.$store.state.jadwalId
+    }
+  },
   mounted() {
     this.$nextTick(() => {
       $('#example1').DataTable()
@@ -83,7 +87,7 @@ export default {
   methods: {
     changeJadwalId (id) {
       this.$store.dispatch('changeJadwalId', id)
-      this.$router.push({ name: 'ProfilSchedule' })
+      this.$router.push({ name: 'Data Jadwal' })
       console.log(id)
     }
   }

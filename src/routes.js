@@ -12,6 +12,7 @@ import ReposView from './components/views/Repos.vue'
 
 import Mahasiswa from './components/views/mahasiswa.vue'
 import Jadwal from './components/views/jadwal.vue'
+import Pelajaran from './components/views/Pelajaran.vue'
 
 import MahasiswaOne from './components/views/mahasiswaone.vue'
 import MahasiswaFinish from './components/views/mahasiswafinish.vue'
@@ -29,9 +30,6 @@ import DataSiswa from './components/views/datasiswa.vue'
 import DataPelajaran from './components/views/datapelajaran.vue'
 import DataJadwal from './components/views/datajadwal.vue'
 
-import Profil from './components/views/profil.vue'
-import ProfilPelajaran from './components/views/profilpelajaran.vue'
-import ProfilJadwal from './components/views/profiljadwal.vue'
 // Routes
 const routes = [
   {
@@ -134,25 +132,20 @@ const routes = [
         name: 'Data Jadwal',
         meta: {description: 'Data Jadwal'}
       }, {
-        path: 'profil',
-        component: Profil,
-        name: 'Profil',
-        meta: {description: 'Profil'}
-      }, {
-        path: 'profilpelajaran',
-        component: ProfilPelajaran,
-        name: 'Profil Pelajaran',
-        meta: {description: 'Profil Pelajaran'}
-      }, {
-        path: 'profiljadwal',
-        component: ProfilJadwal,
-        name: 'Profil Jadwal',
-        meta: {description: 'Profil Jadwal'}
-      }, {
         path: 'mahasiswa',
         component: Mahasiswa,
         name: 'Mahasiswa',
         meta: {description: 'Daftar Mahasiswa'}
+      }, {
+        path: 'jadwal',
+        component: Jadwal,
+        name: 'Jadwal',
+        meta: {description: 'Daftar Jadwal'}
+      }, {
+        path: 'pelajaran',
+        component: Pelajaran,
+        name: 'Pelajaran',
+        meta: {description: 'Daftar Pelajaran'}
       }
     ]
   }, {

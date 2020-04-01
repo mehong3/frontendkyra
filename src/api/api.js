@@ -83,6 +83,20 @@ export default {
         nama
         nim 
         rfid
+        pelajarans {
+          _id
+          nama
+          guru
+          female
+        }
+        jadwals {
+          _id
+          nama
+          tanggal
+          mulai
+          selesai
+          tempat
+        }
       }
     }`
     return this.execute(queryType.QUERY, query)
@@ -120,6 +134,15 @@ export default {
           nama
           nim
         }
+        jadwals {
+          _id
+          nama
+          tanggal
+          mulai
+          selesai
+          tempat
+
+        }
       }
     }`
     return this.execute(queryType.QUERY, query)
@@ -127,6 +150,7 @@ export default {
   listJadwal () {
     var query = `query{
       jadwals {
+        _id
         nama
         tanggal
         mulai 
@@ -135,5 +159,40 @@ export default {
       }
     }`
     return this.execute(queryType.QUERY, query)
+  },
+  getJadwalById (_id) {
+    var query = `query{
+      jadwal(id: "${_id}"){
+        _id
+        tanggal
+        mulai
+        selesai
+        tempat
+        mahasiswas {
+          _id
+          nama
+          nim
+        }
+        pelajaran {
+          _id
+          nama
+          guru
+          female
+        }
+      }
+    }`
+    return this.execute(queryType.QUERY, query)
+  },
+  addJadwal (data) {
+    var mahasiswas = arrayToString(data.mahasiswas)
+    var mutation = `mutation{ addJadwal(
+    nama: "${data.nama}",
+    tanggal: "${data.tanggal}",
+    mulai: "${data.mulai}",
+    selesai: "${data.selesai}",
+    tempat: "${data.tempat}",
+    pelajaran: "${data.pelajaran}",
+    mahasiswas: ${mahasiswas}){ nama tanggal mulai selesai tempat pelajaran { nama } mahasiswas{ nama }}}`
+    return this.execute(queryType.MUTATION, mutation)
   }
 }

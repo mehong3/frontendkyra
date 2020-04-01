@@ -8,7 +8,16 @@
               
               <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="form_box">
 
-                <b-form-group id="input-group-3" label="Tempat:" label-for="input-3">
+              <b-form-group id="input-group-1" label="Nama:" label-for="input-1">
+                  <b-form-input
+                    id="input-1"
+                    v-model="form.nama"
+                    required
+                    placeholder="Masukan Nama"
+                  ></b-form-input>
+                </b-form-group>
+
+              <b-form-group id="input-group-3" label="Tempat:" label-for="input-3">
                   <b-form-select
                     id="input-3"
                     v-model="form.tempat"
@@ -53,6 +62,7 @@
 
 <script>
 import $ from 'jquery'
+import api from '../../api/api'
 // Require needed datatables modules
 require('datatables.net')
 require('datatables.net-bs')
@@ -74,7 +84,11 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault()
-      alert(JSON.stringify(this.form))
+      // alert(JSON.stringify(this.form))
+      console.log(this.form)
+      var res = api.addJadwal(this.form)
+      console.log(res)
+      this.$router.push({ name: 'Jadwal Finish' })
       // window.location.href = '/jadwalfinish'
     },
     onReset(evt) {

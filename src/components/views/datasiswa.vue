@@ -7,9 +7,9 @@
             <div class="info-siswa">
               <img src="/static//img//stock/user2-128x128.jpg" id="img-siswa"/>
               <div class="text-siswa">
-                <p>{{mahasiswa.nama}}</p>
-                <p style="font-weight: 400; font-size: 1.2vw;">{{mahasiswa.nim}}</p>
-                <p style="font-weight: 400; font-size: 1.2vw;">{{mahasiswa.female ? 'Perempuan' : 'Laki-laki'}}</p>
+                <p>{{mahasiswaId.nama}}</p>
+                <p style="font-weight: 400; font-size: 1.2vw;">NIM:{{mahasiswaId.nim}}</p>
+                <p style="font-weight: 400; font-size: 1.2vw;">RFID:{{mahasiswaId.rfid}}</p>
                 <div class="button">
                   <b-button variant="danger" id="gaguna">Tombol</b-button> 
                   <b-button variant="success" style="margin-left: 0.5vw" id="gaguna">Tombol</b-button>
@@ -22,16 +22,16 @@
                   <b-tab title="Jadwal" active button-id="tab1">
                     <b-card-text id="scroll">
                       <b-card-group deck="">
-                       <b-card @click="redirectToJadwal"
-                        :header="jadwal.nama"
+                       <b-card @click="changeJadwalId(jadwal._id)"
+                        v-for="jadwal in mahasiswaId.jadwals" :key="jadwal.data"
+                        :header="jadwals.nama"
                         border-variant="primary"
                         header-text-variant="white"
                         class="mb-2 mt-4"
-                        v-for="jadwal in jadwals"
                         id="cards"
                       >
                         <b-card-text>
-                          Tanggal {{jadwal.tanggal}} <br> Pukul {{jadwal.mulai}}-{{jadwal.selesai}} <br> Di {{jadwal.tempat}}
+                          Tanggal {{jadwals.tanggal}} <br> Pukul {{jadwals.mulai}}-{{jadwals.selesai}} <br> Di {{jadwals.tempat}}
                         </b-card-text>
                       </b-card> 
                       </b-card-group>
@@ -42,12 +42,12 @@
                   <b-tab title="Pelajaran" button-id="tab2">
                     <b-card-text id="scroll">
                       <b-card-group deck>
-                      <b-card @click="redirectToPelajaran"
+                      <b-card @click="changePelajaranId(pelajaran._id)"
+                        v-for="pelajaran in mahasiswaId.pelajarans" :key="pelajaran.nama"
                         :header="pelajaran.nama"
                         border-variant="primary"
                         header-text-variant="white"
                         class="mb-2 mt-4"
-                        v-for="pelajaran in pelajarans"
                         id="cards"
                       >
                         <b-card-text>
@@ -71,43 +71,49 @@
 
 <script>
 import $ from 'jquery'
+import api from '../../api/api'
 require('datatables.net')
 require('datatables.net-bs')
 
 export default {
   name: 'Finish',
+  computed: {
+    mahasiswaId: function () {
+      return this.$store.state.mahasiswaId
+    }
+  },
   mounted() {
     this.$nextTick(() => {
       $('#example1').DataTable()
     })
   },
+  created () {
+    var mahasiswaId = this.$store.state.mahasiswaId
+    console.log(mahasiswaId)
+    api.getMahasiswaById(mahasiswaId).then((res) => {
+      /* console.log(res.data.mahasiswa) */
+      this.mahasiswaId = res.data.mahasiswa
+      // console.log(this.mahasiswaId)
+    })
+  },
   data() {
     return {
-      jadwals: [
-        {nama: 'Filsafat 101', tanggal: '5 April 2020', mulai: '14.00', selesai: '15.30', tempat: 'Ruang 405'},
-        {nama: 'Praktikum Biologi', tanggal: '5 April 2020', mulai: '08.00', selesai: '09.30', tempat: 'Laboratorium'},
-        {nama: 'UH Biologi', tanggal: '6 April 2020', mulai: '14.00', selesai: '15.00', tempat: 'Ruang Tes 1'},
-        {nama: 'Biologi 101', tanggal: '6 April 2020', mulai: '08.00', selesai: '09.30', tempat: 'Ruang 409'},
-        {nama: 'Filsafat 101', tanggal: '6 April 2020', mulai: '12.00', selesai: '13.00', tempat: 'Ruang 108'},
-        {nama: 'UTS Filsafat', tanggal: '7 April 2020', mulai: '10.00', selesai: '11.30', tempat: 'Ruang Tes 1'}
-      ],
-      pelajarans: [
-        {nama: 'Filsafat', guru: 'Benedictus Harris', female: true},
-        {nama: 'Biologi', guru: 'Macarius Billy', female: false}
-      ],
-      mahasiswa: {
-        nama: 'Gabriel Fabiano',
-        nim: '1813414',
-        female: true
-      }
+      jadwals: [],
+      pelajarans: [],
+      mahasiswaId: {}
     }
   },
   methods: {
-    redirectToJadwal() {
-      this.$router.push({name: 'Data Jadwal'})
+    changePelajaranId (id) {
+      this.$store.dispatch('changePelajaranId', id)
+      this.$router.push({ name: 'Data Pelajaran' })
+      console.log('===========================')
+      console.log(id)
     },
-    redirectToPelajaran() {
-      this.$router.push({name: 'Data Pelajaran'})
+    changeJadwalId (id) {
+      this.$store.dispatch('changeJadwalId', id)
+      this.$router.push({ name: 'Data Jadwal' })
+      /* console.log(id) */
     }
   }
 }

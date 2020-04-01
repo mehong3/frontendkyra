@@ -22,5 +22,8 @@ export default {
   },
   changeJadwalToAdd (state, data) {
     state.jadwalToAdd = data
+  },
+  changeJadwalId (state, id) {
+    state.jadwalId = id
   }
 }
